@@ -28,7 +28,7 @@
   },
   "packageRules": [
     {
-      "description": "One weekly PR for every non-major update (one CI run and one preview build per repo per week).",
+      "description": "One weekly PR for every routine non-major update (one CI run and one preview build per repo per week). Updates that need approval are split into their own groups below so they never hold this batch back.",
       "matchUpdateTypes": [
         "minor",
         "patch",
@@ -40,7 +40,7 @@
       "groupSlug": "weekly-updates"
     },
     {
-      "description": "Majors are listed on the Dependency Dashboard and opened only when ticked.",
+      "description": "Majors are listed on the Dependency Dashboard and opened only when ticked (each major keeps its own branch).",
       "matchUpdateTypes": [
         "major"
       ],
@@ -62,7 +62,9 @@
         "minor",
         "major"
       ],
-      "dependencyDashboardApproval": true
+      "dependencyDashboardApproval": true,
+      "groupName": "runtime version changes",
+      "groupSlug": "runtime-versions"
     },
     {
       "description": "0.x packages can break on a 'minor'.",
@@ -70,7 +72,9 @@
       "matchUpdateTypes": [
         "minor"
       ],
-      "dependencyDashboardApproval": true
+      "dependencyDashboardApproval": true,
+      "groupName": "0.x minor updates",
+      "groupSlug": "zero-x-minors"
     },
     {
       "description": "Engine/packageManager fields are managed by hand with the runtime.",
@@ -78,6 +82,13 @@
         "engines",
         "packageManager",
         "volta"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Private ghcr.io/1realtour images: built and pinned by their own workflows; the app has no registry credential for them.",
+      "matchPackageNames": [
+        "/^ghcr\\.io/1realtour//"
       ],
       "enabled": false
     }
