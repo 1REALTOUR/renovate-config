@@ -1,7 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Applied by the Mend Renovate app to every repo of this owner. No onboarding PRs: repos without their own renovate.json run on the fleet policy directly; a repo's own renovate.json should only extend it.",
-  "extends": ["github>1REALTOUR/renovate-config"],
+  "description": "Applied by the Mend Renovate app to every repo of this owner (the app enables it when it sees a commit to this file). No onboarding PRs: repos without their own renovate.json run on the fleet policy directly; a repo's own renovate.json should only extend it.",
+  "extends": [
+    "github>1REALTOUR/renovate-config"
+  ],
   "onboarding": false,
   "requireConfig": "optional"
 }
