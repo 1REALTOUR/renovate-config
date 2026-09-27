@@ -1,0 +1,85 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "1REALTOUR fleet dependency policy. Every repo inherits this through org-inherited-config.json. One batched PR per repo per week keeps CI and preview-build load flat; anything that can break an app waits for a tick on the repo's Dependency Dashboard; security fixes open immediately.",
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigestsToSemver",
+    "docker:pinDigests",
+    ":dependencyDashboard"
+  ],
+  "timezone": "America/Los_Angeles",
+  "schedule": [
+    "before 6am on monday"
+  ],
+  "prConcurrentLimit": 3,
+  "prHourlyLimit": 2,
+  "minimumReleaseAge": "3 days",
+  "internalChecksFilter": "strict",
+  "rangeStrategy": "auto",
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": [
+      "security"
+    ],
+    "schedule": [
+      "at any time"
+    ],
+    "minimumReleaseAge": null
+  },
+  "packageRules": [
+    {
+      "description": "One weekly PR for every non-major update (one CI run and one preview build per repo per week).",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest",
+        "pin",
+        "pinDigest"
+      ],
+      "groupName": "weekly updates",
+      "groupSlug": "weekly-updates"
+    },
+    {
+      "description": "Majors are listed on the Dependency Dashboard and opened only when ticked.",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "Language runtimes and engines: a minor (python 3.12 -> 3.14, node 22 -> 24 line, php 8.4 -> 8.5) changes what every build runs on. Approval only.",
+      "matchDepNames": [
+        "python",
+        "node",
+        "php",
+        "ruby",
+        "go",
+        "golang",
+        "bun",
+        "deno"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "major"
+      ],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "0.x packages can break on a 'minor'.",
+      "matchCurrentVersion": "/^v?0\\./",
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "Engine/packageManager fields are managed by hand with the runtime.",
+      "matchDepTypes": [
+        "engines",
+        "packageManager",
+        "volta"
+      ],
+      "enabled": false
+    }
+  ]
+}
