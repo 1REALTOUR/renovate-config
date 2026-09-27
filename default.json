@@ -1,6 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "1REALTOUR fleet dependency policy. Every repo inherits this through org-inherited-config.json. One batched PR per repo per week keeps CI and preview-build load flat; anything that can break an app waits for a tick on the repo's Dependency Dashboard; security fixes open immediately.",
+  "description": [
+    "1REALTOUR fleet dependency policy. Every repo inherits this through org-inherited-config.json. One batched PR per repo per week keeps CI and preview-build load flat; anything that can break an app waits for a tick on the repo's Dependency Dashboard; security fixes open immediately."
+  ],
   "extends": [
     "config:recommended",
     "helpers:pinGitHubActionDigestsToSemver",
@@ -28,7 +30,9 @@
   },
   "packageRules": [
     {
-      "description": "One weekly PR for every routine non-major update (one CI run and one preview build per repo per week). Updates that need approval are split into their own groups below so they never hold this batch back.",
+      "description": [
+        "One weekly PR for every routine non-major update (one CI run and one preview build per repo per week). Updates that need approval are split into their own groups below so they never hold this batch back."
+      ],
       "matchUpdateTypes": [
         "minor",
         "patch",
@@ -40,14 +44,18 @@
       "groupSlug": "weekly-updates"
     },
     {
-      "description": "Majors are listed on the Dependency Dashboard and opened only when ticked (each major keeps its own branch).",
+      "description": [
+        "Majors are listed on the Dependency Dashboard and opened only when ticked (each major keeps its own branch)."
+      ],
       "matchUpdateTypes": [
         "major"
       ],
       "dependencyDashboardApproval": true
     },
     {
-      "description": "Language runtimes and engines: a minor (python 3.12 -> 3.14, node 22 -> 24 line, php 8.4 -> 8.5) changes what every build runs on. Approval only.",
+      "description": [
+        "Language runtimes and engines: a minor (python 3.12 -> 3.14, node 22 -> 24 line, php 8.4 -> 8.5) changes what every build runs on. Approval only."
+      ],
       "matchDepNames": [
         "python",
         "node",
@@ -67,7 +75,9 @@
       "groupSlug": "runtime-versions"
     },
     {
-      "description": "0.x packages can break on a 'minor'.",
+      "description": [
+        "0.x packages can break on a 'minor'."
+      ],
       "matchCurrentVersion": "/^v?0\\./",
       "matchUpdateTypes": [
         "minor"
@@ -77,7 +87,9 @@
       "groupSlug": "zero-x-minors"
     },
     {
-      "description": "Engine/packageManager fields are managed by hand with the runtime.",
+      "description": [
+        "Engine/packageManager fields are managed by hand with the runtime."
+      ],
       "matchDepTypes": [
         "engines",
         "packageManager",
@@ -86,7 +98,9 @@
       "enabled": false
     },
     {
-      "description": "Private ghcr.io/1realtour images: built and pinned by their own workflows; the app has no registry credential for them.",
+      "description": [
+        "Private ghcr.io/1realtour images: built and pinned by their own workflows; the app has no registry credential for them."
+      ],
       "matchPackageNames": [
         "/^ghcr\\.io/1realtour//"
       ],
