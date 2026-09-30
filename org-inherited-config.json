@@ -1,11 +1,18 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": [
-    "Applied by the Mend Renovate app to every repo of this owner (enabled when the app sees a commit to this file). No onboarding PRs; repos without their own renovate.json run on the fleet policy (github>1REALTOUR/renovate-config)."
+    "Applied by the Mend Renovate app to every repo of this owner (enabled when the app sees a commit to this file). No onboarding PRs; repos without their own renovate.json run on the fleet policy (github>1REALTOUR/renovate-config).",
+    "Waqar Qayyum (GitHub laimnoaah, dev@1realtour.com) is requested as reviewer and assigned on every Renovate PR in the 1REALTOUR org so he gets the notifications (owner request 2026-09-29)."
   ],
   "extends": [
     "github>1REALTOUR/renovate-config"
   ],
   "onboarding": false,
-  "requireConfig": "optional"
+  "requireConfig": "optional",
+  "reviewers": [
+    "laimnoaah"
+  ],
+  "assignees": [
+    "laimnoaah"
+  ]
 }
